@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { type DefaultTheme } from "styled-components";
 import Link from "next/link";
 import { creationCycleConfig } from "@/config/creationCycle";
 
@@ -19,14 +19,14 @@ interface CycleCardProps {
 }
 
 const Card = styled.div<{ $compact?: boolean }>`
-  background: ${({ theme }) => theme.surface};
-  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }: { theme: DefaultTheme }) => theme.surface};
+  border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.border};
   border-radius: ${(props) => (props.$compact ? "8px" : "12px")};
   overflow: hidden;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.accent};
+    border-color: ${({ theme }: { theme: DefaultTheme }) => theme.accent};
   }
 `;
 
@@ -39,13 +39,13 @@ const CycleTitle = styled(Link)<{ $compact?: boolean }>`
   font-family: "Source Sans 3", sans-serif;
   font-size: ${(props) => (props.$compact ? "0.95rem" : "1.1rem")};
   font-weight: 600;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
   margin-bottom: 0.5rem;
   text-decoration: none;
   line-height: 1.3;
 
   &:hover {
-    color: ${({ theme }) => theme.accent};
+    color: ${({ theme }: { theme: DefaultTheme }) => theme.accent};
   }
 `;
 
@@ -55,7 +55,7 @@ const Meta = styled.div`
   gap: 0.75rem;
   align-items: center;
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.textMuted};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textMuted};
 `;
 
 const StatusBadge = styled.span<{ $status: string }>`
@@ -66,9 +66,9 @@ const StatusBadge = styled.span<{ $status: string }>`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: ${({ theme, $status }) =>
+  background: ${({ theme, $status }: { theme: DefaultTheme; $status: string }) =>
     $status === "active" ? theme.accentMuted : $status === "completed" ? theme.surfaceHover : theme.border};
-  color: ${({ theme, $status }) =>
+  color: ${({ theme, $status }: { theme: DefaultTheme; $status: string }) =>
     $status === "active" ? theme.accent : theme.textMuted};
 `;
 

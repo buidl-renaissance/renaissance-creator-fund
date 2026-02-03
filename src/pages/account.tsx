@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { keyframes } from "styled-components";
 import { useUser } from "@/contexts/UserContext";
-// @ts-expect-error - qrcode.react types
 import { QRCodeSVG } from "qrcode.react";
 import { creationCycleConfig } from "@/config/creationCycle";
 import { TabBar, TabBarSpacer } from "@/components/navigation";

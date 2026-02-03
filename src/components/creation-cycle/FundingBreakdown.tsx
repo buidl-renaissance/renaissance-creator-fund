@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { type DefaultTheme } from "styled-components";
 import { creationCycleConfig } from "@/config/creationCycle";
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const SectionTitle = styled.h4`
   font-family: "Source Sans 3", sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.textMuted};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.textMuted};
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
@@ -29,7 +29,7 @@ const Row = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.border};
+  border-bottom: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.border};
 
   &:last-child {
     border-bottom: none;
@@ -38,17 +38,17 @@ const Row = styled.div`
 
 const Label = styled.span`
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
 `;
 
 const Value = styled.span`
   font-size: 0.9rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
 `;
 
 const TotalRow = styled(Row)`
-  border-top: 2px solid ${({ theme }) => theme.border};
+  border-top: 2px solid ${({ theme }: { theme: DefaultTheme }) => theme.border};
   padding-top: 0.75rem;
   margin-top: 0.25rem;
 `;
