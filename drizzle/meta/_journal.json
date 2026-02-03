@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1768596825064,
+      "tag": "0000_lame_moira_mactaggert",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1738713600000,
+      "tag": "0001_creation_cycle",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1770142642777,
+      "tag": "0002_whole_phil_sheldon",
+      "breakpoints": true
+    }
+  ]
+}
