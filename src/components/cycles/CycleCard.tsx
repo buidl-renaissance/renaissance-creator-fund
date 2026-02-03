@@ -21,7 +21,7 @@ interface CycleCardProps {
 const Card = styled.div<{ $compact?: boolean }>`
   background: ${({ theme }: { theme: DefaultTheme }) => theme.surface};
   border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.border};
-  border-radius: ${(props) => (props.$compact ? "8px" : "12px")};
+  border-radius: ${(props: { $compact?: boolean }) => (props.$compact ? "8px" : "12px")};
   overflow: hidden;
   transition: all 0.2s ease;
 
@@ -31,13 +31,13 @@ const Card = styled.div<{ $compact?: boolean }>`
 `;
 
 const CardContent = styled.div<{ $compact?: boolean }>`
-  padding: ${(props) => (props.$compact ? "1rem" : "1.25rem")};
+  padding: ${(props: { $compact?: boolean }) => (props.$compact ? "1rem" : "1.25rem")};
 `;
 
 const CycleTitle = styled(Link)<{ $compact?: boolean }>`
   display: block;
   font-family: "Source Sans 3", sans-serif;
-  font-size: ${(props) => (props.$compact ? "0.95rem" : "1.1rem")};
+  font-size: ${(props: { $compact?: boolean }) => (props.$compact ? "0.95rem" : "1.1rem")};
   font-weight: 600;
   color: ${({ theme }: { theme: DefaultTheme }) => theme.text};
   margin-bottom: 0.5rem;
