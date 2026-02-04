@@ -11,23 +11,22 @@ config({ path: '.env' });
 // Use local DB for seeding
 process.env.USE_LOCAL = 'true';
 
-const { getDb } = await import('../src/db/drizzle');
-const {
-  users,
-  cycles,
-  cycleArtists,
-  celebrationEvents,
-  tickets,
-  sponsors,
-} = await import('../src/db/schema');
-
-const db = getDb();
-
-// Date helpers (Unix seconds)
-const date = (y: number, m: number, d: number) =>
-  Math.floor(new Date(y, m - 1, d).getTime() / 1000);
+// Date helper - returns Date object
+const makeDate = (y: number, m: number, d: number) => new Date(y, m - 1, d);
 
 async function seed() {
+  const { getDb } = await import('../src/db/drizzle');
+  const {
+    users,
+    cycles,
+    cycleArtists,
+    celebrationEvents,
+    tickets,
+    sponsors,
+  } = await import('../src/db/schema');
+
+  const db = getDb();
+
   console.log('🌱 Seeding database...\n');
 
   // 1. Users (creators + community)
@@ -98,8 +97,8 @@ async function seed() {
       id: cycleIds.april,
       title: 'April 2026',
       slug: 'april-2026',
-      startDate: new Date(date(2026, 4, 1)),
-      endDate: new Date(date(2026, 4, 30)),
+      startDate: makeDate(2026, 4, 1),
+      endDate: makeDate(2026, 4, 30),
       status: 'completed',
       creativeDirection:
         'Exploring the boundary between physical and digital artifacts. A month of collaborative making, documentation, and community dialogue.',
@@ -109,8 +108,8 @@ async function seed() {
       id: cycleIds.may,
       title: 'May 2026',
       slug: 'may-2026',
-      startDate: new Date(date(2026, 5, 1)),
-      endDate: new Date(date(2026, 5, 31)),
+      startDate: makeDate(2026, 5, 1),
+      endDate: makeDate(2026, 5, 31),
       status: 'active',
       creativeDirection:
         'Sound, memory, and place. Creators investigate local archives and oral histories to produce new sonic and visual work.',
@@ -144,7 +143,7 @@ async function seed() {
       title: 'April 2026 — Salon & Showcase',
       description:
         'Join us for an evening of presentation, documentation, and conversation. Meet the creators, view the work, and celebrate the completion of the April cycle.',
-      eventDate: new Date(date(2026, 4, 30)),
+      eventDate: makeDate(2026, 4, 30),
       startTime: '19:00',
       endTime: '21:30',
       location: 'Renaissance Studio',
@@ -158,7 +157,7 @@ async function seed() {
       title: 'May 2026 — Sound & Memory',
       description:
         'A listening party and exhibition. New sonic and visual work from the May cycle, with creator-led discussion.',
-      eventDate: new Date(date(2026, 5, 28)),
+      eventDate: makeDate(2026, 5, 28),
       startTime: '19:00',
       endTime: '21:00',
       location: 'Renaissance Studio',

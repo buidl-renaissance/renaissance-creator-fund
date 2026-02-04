@@ -1,3 +1,4 @@
+import path from 'path';
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import { config } from 'dotenv';
@@ -6,6 +7,12 @@ import * as schema from './schema';
 // Load environment variables from .env.local or .env
 config({ path: '.env.local' });
 config({ path: '.env' });
+
+// Resolve local DB path so seed and dev server use the same file.
+// Always use process.cwd() since __dirname can be unreliable in Next.js builds.
+const appBlockRoot = process.cwd();
+const localDbPath = path.join(appBlockRoot, 'dev.sqlite3');
+const localDbUrl = `file:${localDbPath}`;
 
 // Create Turso client with singleton pattern for Next.js hot reloading
 let tursoClient: ReturnType<typeof createClient> | null = null;
@@ -17,14 +24,13 @@ function getTursoClient() {
   }
 
   const useLocal = process.env.USE_LOCAL === 'true';
-  const url = process.env.TURSO_DATABASE_URL || 'file:./dev.sqlite3';
+  const url = process.env.TURSO_DATABASE_URL || localDbUrl;
   const authToken = process.env.TURSO_AUTH_TOKEN;
 
   // Use local file-based SQLite if USE_LOCAL is set or no auth token
   if (useLocal || !authToken) {
-    const localUrl = 'file:./dev.sqlite3';
-    console.log('📁 Using local SQLite database:', localUrl);
-    tursoClient = createClient({ url: localUrl });
+    console.log('📁 Using local SQLite database:', localDbUrl);
+    tursoClient = createClient({ url: localDbUrl });
   } else {
     console.log('☁️ Using remote Turso database');
     tursoClient = createClient({ url, authToken });
